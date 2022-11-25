@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './index.scss';
+import Game from './components/Game/Game';
+import Result from './components/Result/Result';
 
 const questions = [
     {
@@ -23,42 +25,6 @@ const questions = [
     },
 ];
 
-function Result({ correct }) {
-    return (
-        <div className="result">
-            <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" />
-            <h2>
-                {correct === 1
-                    ? `Вы отгадали ${correct} ответ из ${questions.length}`
-                    : `Вы отгадали ${correct} ответа из ${questions.length}`}
-            </h2>
-            <a href="/">
-                <button>Попробовать снова</button>
-            </a>
-        </div>
-    );
-}
-
-function Game({ step, onClickVariant, question }) {
-    const percentage = ((step / questions.length) * 100).toFixed(0);
-
-    return (
-        <>
-            <div className="progress">
-                <div style={{ width: `${percentage}%` }} className="progress__inner"></div>
-            </div>
-            <h1>{question.title}</h1>
-            <ul>
-                {question.variants.map((text, index) => (
-                    <li key={text} onClick={() => onClickVariant(index)}>
-                        {text}
-                    </li>
-                ))}
-            </ul>
-        </>
-    );
-}
-
 function App() {
     const [step, setStep] = useState(0);
     const [correct, setCorrect] = useState(0);
@@ -75,9 +41,14 @@ function App() {
     return (
         <div className="App">
             {step !== questions.length ? (
-                <Game step={step} question={question} onClickVariant={onClickVariant} />
+                <Game
+                    step={step}
+                    question={question}
+                    onClickVariant={onClickVariant}
+                    questions={questions}
+                />
             ) : (
-                <Result correct={correct} />
+                <Result correct={correct} questions={questions} />
             )}
         </div>
     );
