@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styles from './Game.module.scss';
 
 const Game = ({ step, onClickVariant, question, questions }) => {

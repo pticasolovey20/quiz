@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-
 import { questions } from 'components/Data/questions';
-
 import { Game } from './components/Game';
 import { Result } from './components/Result';
 
